@@ -1,0 +1,34 @@
+.logo-icon {
+    color: #fff;
+    font-size: 5rem;
+}
+
+.box {
+    min-width: 20rem;
+}
+.home-width {
+    min-width: 35rem;
+    max-width: 60rem;
+}
+.nav-width {
+    min-width: 12rem;
+    max-width: 25rem;
+}
+.feed-width {
+    min-width: 20rem;
+    max-width: 35rem;
+}
+
+.scroll {
+    overflow: scroll !important;;
+}
+
+@media (max-width: 570px) {
+    .navigation {
+        height: auto !important;
+        width: 100%;
+        position: relative;
+        bottom: 0;
+        left: 0;
+    }
+}
