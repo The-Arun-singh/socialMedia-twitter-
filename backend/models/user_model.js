@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-// schema for the user/customer
+// schema for the user
 
 const userSchema = new mongoose.Schema({
     name: {
@@ -23,24 +23,23 @@ const userSchema = new mongoose.Schema({
     },
     profilePic: {
         type: String,
-        required: true,
     },
     location: {
         type: String,
     },
     dob: {
-        type: Date,
+        type: String,
     },
     followers: [
         {
-            _id: mongoose.Schema.Types.ObjectId,
-            ref: 'User'
+            type: mongoose.Schema.Types.ObjectId,
+            ref: () => "User",
         }
     ],
     following: [
         {
-            _id: mongoose.Schema.Types.ObjectId,
-            ref: 'User'
+            type: mongoose.Schema.Types.ObjectId,
+            ref: () => "User",
         }
     ],
     role: {

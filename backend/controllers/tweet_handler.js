@@ -1,5 +1,7 @@
 import Tweet from "../models/tweet_model.js";
 
+// here are all the routes request handlers for the tweet model
+
 export const createTweetHandler = async (req, res) => {
     try {
         const { content, img } = req.body;
@@ -69,7 +71,7 @@ export const tweetReplyHandler = async (req, res) => {
         })
 
         const reply = await Tweet.findByIdAndUpdate(req.params.id, {
-            $push: { reply: tweet._id },
+            $push: { replies: tweet._id },
         }, {
             new: true
         });
@@ -81,11 +83,19 @@ export const tweetReplyHandler = async (req, res) => {
         res.status(500).json({ message: error.message });
     }
 };
+
 export const retweetHandler = async (req, res) => {
     try {
         const tweet = await Tweet.findById(req.params.id);
 
         if (tweet.retweetedBy.includes(req.user._id)) return res.status(400).json({ message: 'already retweeted' });
+
+        await Tweet.create({
+            content: tweet.content,
+            tweetedBy: req.user._id,
+            img: tweet.img,
+            retweetOf: req.params.id,
+        })
 
         const retweet = await Tweet.findByIdAndUpdate(req.params.id, {
             $push: { retweetedBy: req.user._id },
@@ -121,10 +131,22 @@ export const getTweetHandler = async (req, res) => {
             .populate({
                 path: "replies",
                 select: '-password',
+                populate: {
+                    path: "retweetedBy",
+                    select: "-password"
+                }
+            })
+            .populate({
+                path: "replies",
+                select: '-password',
+                populate: {
+                    path: "tweetedBy",
+                    select: "-password"
+                },
             })
             .exec();
 
-        res.status(200).json({ message: 'User found', tweet: tweet });
+        res.status(200).json({ message: 'Tweet found', tweet: tweet });
 
     } catch (error) {
         console.error(error);
@@ -133,7 +155,7 @@ export const getTweetHandler = async (req, res) => {
 };
 export const getAllTweetsHandler = async (req, res) => {
     try {
-        const tweet = await Tweet.find()
+        const tweets = await Tweet.find()
             .populate({
                 path: "tweetedBy",
                 select: '-password',
@@ -154,7 +176,7 @@ export const getAllTweetsHandler = async (req, res) => {
             .exec();
 
 
-        res.status(200).json({ message: 'User found', tweet: tweet });
+        res.status(200).json({ message: 'User found', tweets: tweets });
 
     } catch (error) {
         console.error(error);

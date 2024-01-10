@@ -3,7 +3,7 @@ import express from 'express';
 
 const fileRouter = express.Router();
 
-// all the route end points for the file upload and downloads
+// all the route end points for the file upload and downloads and also their logic to handle the file upload and downloads using multer.
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
         cb(null, 'uploads/');

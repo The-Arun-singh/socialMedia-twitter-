@@ -4,7 +4,7 @@ import 'dotenv/config.js'
 import User from "../models/user_model.js";
 
 
-// here are all the functional logic needed for the backend routes for users
+// here are all the functional logic needed for the backend routes for Authentication like login and registerations for user.
 
 
 export const signupHandler = async (req, res) => {
@@ -51,19 +51,12 @@ export const loginHandler = async (req, res) => {
 
         const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: "1h" });
 
-
+        // using select method to populate the user object with the exeption of password field
+        const authUser = await User.findById(user._id)
+            .select('-password')
+            .exec();
         res.status(200).json({
-            user: {
-                id: user._id,
-                name: user.name,
-                userName: user.userName,
-                email: user.email,
-                profilePic: user.profilePic,
-                location: user.location,
-                dob: user.dob,
-                followers: user.followers,
-                following: user.following,
-            },
+            user: authUser,
             token: token,
             message: "User successfully logedIn"
         });

@@ -1,14 +1,17 @@
 import { BrowserRouter, Route, Routes, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
+
 import './styles/App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import 'react-toastify/dist/ReactToastify.css';
+
 import Login from './pages/authPages/Login';
 import Home from './pages/Home';
 import Register from './pages/authPages/Register';
-import MyProfile from './pages/userPages/MyProfile';
-import Tweet from './pages/Tweets';
+import Profile from './pages/userPages/Profile';
 import { useEffect } from 'react';
-import { toast } from 'react-toastify';
+import { ToastContainer, toast } from 'react-toastify';
+import Tweet from './pages/Tweet';
 
 function App() {
 
@@ -39,8 +42,8 @@ function App() {
         <Route exact path={'/'} element={<Home />} />
         <Route exact path={'/login'} element={<Login />} />
         <Route exact path={'/register'} element={<Register />} />
-        <Route exact path={'/myProfile'} element={<MyProfile />} />
-        <Route exact path={'/Tweet'} element={<Tweet />} />
+        <Route exact path={'/profile/:id'} element={<Profile />} />
+        <Route exact path={'/tweet/:id'} element={<Tweet />} />
       </Routes>
     </>)
   };
@@ -49,6 +52,7 @@ function App() {
   return (
     <div className="App">
       <BrowserRouter>
+        <ToastContainer />
         <DynamicRouter />
       </BrowserRouter>
     </div>

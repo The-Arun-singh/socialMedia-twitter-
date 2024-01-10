@@ -1,13 +1,13 @@
 import express from 'express';
-import { loginHandler, signupHandler } from '../controllers/auth_handlers';
+import { loginHandler, signupHandler } from '../controllers/auth_handlers.js';
 
-const userRouter = express.Router();
+const authRouter = express.Router();
 
-// all the routes for user authentication and user data manipulation
+// all the routes for user authentication 
 
-userRouter.post("/api/auth/register", signupHandler);
-userRouter.post("/api/auth/login", loginHandler);
+authRouter.post("/api/auth/register", signupHandler);
+authRouter.post("/api/auth/login", loginHandler);
 
 
 
-export default userRouter; 
+export default authRouter; 

@@ -8,6 +8,7 @@ import { useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
 
 
+// this component renders the the login page
 const Login = () => {
     const [credentials, setCredentials] = useState({
         email: '',
@@ -21,7 +22,7 @@ const Login = () => {
     const login = async (credentials) => {
         // console.log(credentials);
         try {
-            await fetch("http://localhost:8000/login", {
+            await fetch("http://localhost:8000/api/auth/login", {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(credentials)
@@ -32,6 +33,7 @@ const Login = () => {
                 // console.log(data);
                 if (data.message === 'User successfully logedIn') {
                     toast.success(data.message)
+                    console.log(data);
                     localStorage.setItem('token', data.token);
                     localStorage.setItem('user', JSON.stringify(data.user));
                     dispatch({ type: 'LOGIN', payload: data.user });
@@ -62,7 +64,7 @@ const Login = () => {
                 <div className='bg-info d-flex justify-content-center align-items-center p-5'>
                     <div className='d-flex flex-column justify-content-center align-items-center'>
                         <p className='text-light fw-semibold fs-4 px-4'>Welcome Back</p>
-                        <i class="fa-brands fa-rocketchat logo-icon"></i>
+                        <i className="fa-brands fa-rocketchat logo-icon"></i>
                     </div>
                 </div>
                 <div className='bg-light p-5 box'>

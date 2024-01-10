@@ -1,8 +1,8 @@
 import express from 'express';
-import { authorization } from '../middlewares/authorization';
-import { createTweetHandler, deleteTweetHandler, getAllTweetsHandler, getTweetHandler, retweetHandler, tweetDislikesHandler, tweetLikesHandler, tweetReplyHandler } from '../controllers/tweet_handler';
+import { authorization } from '../middlewares/authorization.js';
+import { createTweetHandler, deleteTweetHandler, getAllTweetsHandler, getTweetHandler, retweetHandler, tweetDislikesHandler, tweetLikesHandler, tweetReplyHandler } from '../controllers/tweet_handler.js';
 
-// all the routes for user authentication and user data manipulation
+// all the routes for tweets
 
 const tweetRouter = express.Router();
 

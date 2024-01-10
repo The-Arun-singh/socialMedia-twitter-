@@ -23,19 +23,29 @@ const tweetSchema = new mongoose.Schema({
             ref: "User",
         }
     ],
+    retweetOf: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: () => "Tweet",
+    },
     img: {
         type: String,
-        required: true,
     },
     replies: [
         {
             type: mongoose.Schema.Types.ObjectId,
-            ref: "Tweet",
+            ref: () => "Tweet",
         }
     ],
 }, {
     timestamps: true
 });
+
+tweetSchema.set('toJSON', {
+    transform: function (doc, ret, options) {
+        ret.createdAt = doc.createdAt.toLocaleDateString();
+        return ret;
+    }
+})
 
 const Tweet = mongoose.model('Tweet', tweetSchema);
 

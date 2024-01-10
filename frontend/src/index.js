@@ -6,6 +6,8 @@ import reportWebVitals from './reportWebVitals';
 import { Provider } from 'react-redux';
 import store from './redux/store';
 
+
+// here we use provider component form react-redux to provide redux store and all the state (like the auth state) to all the components in the app.
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>

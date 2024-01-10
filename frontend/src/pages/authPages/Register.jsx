@@ -7,6 +7,9 @@ import { useState } from 'react';
 import { toast } from 'react-toastify';
 
 
+
+// this component renders the the user registeration page
+
 const Register = () => {
     const [userData, setUserData] = useState({
         name: '',

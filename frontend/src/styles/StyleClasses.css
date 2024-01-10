@@ -6,29 +6,33 @@
 .box {
     min-width: 20rem;
 }
-.home-width {
-    min-width: 35rem;
-    max-width: 60rem;
-}
-.nav-width {
-    min-width: 12rem;
+/* .nav-width {
+    min-width: 15rem;
     max-width: 25rem;
+} */
+.home-width {
+    min-width: 50rem;
 }
 .feed-width {
-    min-width: 20rem;
-    max-width: 35rem;
+    min-width: 70%;
 }
 
 .scroll {
-    overflow: scroll !important;;
+    overflow-y: scroll !important;;
+}
+.navigation {
+    background-color: #fff;
 }
 
-@media (max-width: 570px) {
-    .navigation {
-        height: auto !important;
-        width: 100%;
-        position: relative;
-        bottom: 0;
-        left: 0;
-    }
+.main-container {
+    flex-direction: row !important;
+    height: 100vh;
+}
+
+
+.profile-pic {
+    position: relative !important;
+    top: 4.5rem !important;
+    min-width: 5rem;
+    max-width: 8rem;
 }
